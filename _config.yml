@@ -1,10 +1,10 @@
 # Site settings
 title: BY Blog
-SEOTitle: 赛'博客 | BY Blog
+SEOTitle: 赛'博客 |WSS'Blog
 header-img: img/post-bg-desk.jpg
 email: w550515513@gmail.com
 description: "Every failure is leading towards success."
-keyword: "BY, BY Blog, 赛的博客, SaiSaiWang, 王赛赛, chd, funny"
+keyword: "WSS, WSS Blog, 赛的博客, SaiSaiWang, 王赛赛, chd, funny"
 url: "http://w550515513.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/w550515513/w550515513.github.io.git" # you code repository
@@ -23,7 +23,7 @@ zhihu_username:     w550515513
 github_username:    NULL
 facebook_username:  NULL
 jianshu_username:   NULL
-#twitter_username:   qiubaiying
+#twitter_username:   wss
 
 
 
