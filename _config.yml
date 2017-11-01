@@ -18,8 +18,8 @@ sidebar-avatar: /img/about-wss-gentle.jpg      # use absolute URL, seeing it's u
 
 # SNS settings
 RSS: false
-# weibo_username:     qiubaiying
-zhihu_username:     w550515513
+# weibo_username:     NULL
+zhihu_username:     NULL
 github_username:    NULL
 facebook_username:  NULL
 jianshu_username:   NULL
