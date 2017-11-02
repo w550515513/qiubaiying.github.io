@@ -94,16 +94,16 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "WY",
-        href: "http://zhengwuyang.com"
+        title: "空位",
+        href: "baidu.com"
     },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
+        title: "FaceBook",
+        href: "https://www.facebook.com/profile.php?id=100009761527675"
     },{
-        title: "Apple",
-        href: "https://apple.com"
+        title: "python",
+        href: "https://www.python.org/"
     },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
+        title: "DeepLearning",
+        href: "https://zh.coursera.org/specializations/deep-learning"
     }
 ]
