@@ -211,8 +211,9 @@ df.sort(columns='B')
 
 # DataFrame 的基本统计学属性预览
 df.describe()
-"""
-  A  B  C  D
+
+#out
+        A      B       C       D
 count 6.000000 6.000000 6.000000 6.000000 #数量
 mean 0.073711 -0.431125 -0.687758 -0.233103 #平均值
 std 0.843157 0.922818 0.779887 0.973118 #标准差
@@ -221,7 +222,7 @@ min -0.861849 -2.104569 -1.509059 -1.135632 #最小值
 50% 0.022070 -0.228039 -0.767252 -0.386188 #正态分布 50%
 75% 0.658444 0.041933 -0.034326 0.461706 #正态分布 75%
 max 1.212112 0.567020 0.276232 1.071804 #最大值
-"""
+
 ```
 
 ## 合并 ##
@@ -247,7 +248,7 @@ df = pd.DataFrame(np.random.randn(10, 4))
 pieces = [df[:3], df[3:7], df[7:]]#前3行+4到7行+8到最后
 pd.concat(pieces)
 
-  0  1  2  3
+    0           1         2         3
 0 -0.548702 1.467327 -1.015962 -0.483075
 1 1.637550 -1.217659 -0.291519 -1.745505
 2 -0.263952 0.991460 -0.919069 0.266046
@@ -293,7 +294,7 @@ Freq: D, dtype: float64
 # 对不同维度的 pandas 对象进行减法操作
 df.sub(s, axis='index')
 
-   A  B  C D F
+            A   B   C   D   F
 2013-01-01 NaN NaN NaN NaN NaN
 2013-01-02 NaN NaN NaN NaN NaN
 2013-01-03 -1.861849 -3.104569 -1.494929 4 1
@@ -380,8 +381,8 @@ dtype: object
 
 ```python
 >>> df.groupby(['A','B']).sum()
-                      C         D
-    A   B
+                               
+    A   B			C		D
     bar one    0.846428  1.884603
         three  1.166448 -0.208171
         two   -0.654609  1.258091
@@ -474,5 +475,4 @@ df.to_excel('foo.xlsx', sheet_name='Sheet1')
 ```
 
 >资料来源于：[Python科学计算之Pandas详解，pythonpandas](http://www.bkjia.com/Pythonjc/1189627.html)
-
 >          [十分钟搞定pandas](http://python.jobbole.com/84416/)
