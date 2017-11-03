@@ -12,7 +12,7 @@ tags:
 ---
 
 
-### Pandas介绍
+## Pandas介绍
 
 pandas是为了解决数据分析任务而创建的，纳入了大量的库和标准数据模型，提供了高效地操作大型数据集所需的工具。
 
@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt #python的2D绘图库
 ```
 
 
-### Series
+## Series
 
 一个series是一个一维的数据类型，其中每一个元素都有一个标签。类似于Numpy中元素带标签的数组。其中，标签可以是数字或者字符串。
 
@@ -55,11 +55,11 @@ print s
 5 8.0
 ```
 
-### DataFrame
+## DataFrame
 
 一个dataframe是一个二维的表结构。Pandas的dataframe可以存储许多种不同的数据类型，并且每一个坐标轴都有自己的标签。你可以把它想象成一个series的字典项。
 
-创建一个 DateFrame：
+###创建一个 DateFrame：
 
 ```python
 #创建日期索引序列 
@@ -69,144 +69,81 @@ df = pd.DataFrame(np.random.randn(6,4), index=dates, columns=list('ABCD'))
 print df
 ```
 
-
-
-
-
-#### String 操作简化了
-
-`String` 许多要通过 `.characters` 进行的操作，可以直接用 String 进行操作了。
-
-例如：
-
-```swift
-let greeting = "Hello, 😜!"
-// No need to drill down to .characters
-let n = greeting.count
-let endOfSentence = greeting.index(of: "!")!
-
+输出：
+```python
+  				A  		B  			C  			D
+2013-01-01 -0.334482 0.746019 -2.205026 -0.803878
+2013-01-02 2.007879 1.559073 -0.527997 0.950946
+2013-01-03 -1.053796 0.438214 -0.027664 0.018537
+2013-01-04 -0.208744 -0.725155 -0.395226 -0.268529
+2013-01-05 0.080822 -1.215433 -0.785030 0.977654
+2013-01-06 -0.126459 0.426328 -0.474553 -1.968056
 ```
 
-#### Series
+###字典创建 DataFrame
 
-一个series是一个一维的数据类型，其中每一个元素都有一个标签。类似于Numpy中元素带标签的数组。其中，标签可以是数字或者字符串。
-
-swift 4 为字符串片段新增了一个叫 `Substring` 的类型。
-
-当你创建一个字符串的片段时，会产生一个 `Substring` 实例。`Substring` 与 `String` 用法相同， 因为子串和原字符串共享内存，所以对子串的操作快速而且高效。
-
-```swift
-let greeting = "Hi there! It's nice to meet you! 👋"
-let endOfSentence = greeting.index(of: "!")! 
-
-// 产生 Substring 实例
-let firstSentence = greeting[...endOfSentence]
-// firstSentence == "Hi there!"
-
-// `Substring` 与 `String` 用法相同
-let shoutingSentence = firstSentence.uppercased()
-// shoutingSentence == "HI THERE!" 
+```python
+df2 = pd.DataFrame({ 'A' : 1,
+   'B' : pd.Timestamp('20130102'),
+   'C' : pd.Series(1,index=list(range(4)),dtype='float32'),
+   'D' : np.array([3] * 4,dtype='int32'),
+   'E' : pd.Categorical(["test","train","test","train"]),
+   'F' : 'foo' })
+```
+输出：
+```python
+  A  B 		   C D  E    F
+0 1 2013-01-02 1 3 test foo
+1 1 2013-01-02 1 3 train foo
+2 1 2013-01-02 1 3 test foo
+3 1 2013-01-02 1 3 train foo
 ```
 
-但是要注意一个 `Substring` 保留从其生成的完整的 `String`值。 当您传递一个看似很小的 `Substring` 时，这可能导致意外的高内存开销。所以使用 `Substring`时，最好转化为 `String`.
+###将csv文件数据导入Pandas
 
-```swift
-let newString = String(substring)
+```python
+df = pd.read_csv("Average_Daily_Traffic_Counts.csv", header = 0)
+df.head()
 ```
 
+##选择/切片
 
-#### 换行可以不用 `\n`了！
+```python
+# 选择单独的一列，返回 Serires，与 df.A 效果相当。
+df['A']
 
-Swift 3，字符串换行要插入 `\n`。
-例如：
+# 位置切片
+df[0:3]
 
-![](https://ws4.sinaimg.cn/large/006tNc79gy1fjdam0wvhhj305d0283yf.jpg)
+# 索引切片
+df['20130102':'20130104']
 
-在 Swift 4 可以这样操作:
+#　通过标签选择
+df.loc[dates[0]] #dates = pd.date_range('20130101', periods=6) 选行
 
-![](https://ws2.sinaimg.cn/large/006tNc79gy1fjdas2yri4j303q0260sm.jpg)
+# 对多个轴同时通过标签进行选择
+df.loc[:,['A','B']]
 
-用两个 `“”“` 包裹起来的字符串会自动添加 `\n` 换行，更加直观了。注意：换行与缩进参照的是第二个 `“”“` 号的位置。
+# 获得某一个单元的数据
+**df.loc[dates[0],'A']** #先行后列
 
-嗯，我觉得OK！
+# 通过位置进行选择
+df.iloc[3]
 
-#### 支持 Unicode 9
+# 切片
+df.iloc[3:5,0:2]
 
-Swift 4 支持 Unicode 9，[为现代表情符号修正了一些问题](https://oleb.net/blog/2016/12/emoji-4-0/)。
+# 列表选择
+df.iloc[[1,2,4],[0,2]]
 
+# 获得某一个单元的数据
+df.iloc[1,1]
+# 或者
+df.iat[1,1] # 更快的做法
 
-```swift
-let family1 = "👨‍👩‍👧‍👦"
-let family2 = "👨\u{200D}👩\u{200D}👧\u{200D}👦"
-family1 == family2 // → true
+# isin 过滤
+df2[df2['E'].isin(['two','four'])]
+
+#过滤
+final[final.VIS>0]
 ```
-
-居然还有这种操作~
-
-### 新增 KeyPath 数据类型
-
-KeyPath 是 Swift 4 新增加的数据类型。
-
-定义两个结构体 `Person`与`Book` 
-
-```swift
-struct Person {
-    var name: String
-}
-
-struct Book {
-    var title: String
-    var authors: [Person]
-    var primaryAuthor: Person {
-        return authors.first!
-    }
-}
-
-let abelson = Person(name: "Harold Abelson")
-let sussman = Person(name: "Gerald Jay Sussman")
-let book = Book(title: "Structure and Interpretation of Computer Programs", authors: [abelson, sussman])
-```
-```swift
-book[keyPath: \Book.title]
-book[keyPath: \Book.primaryAuthor.name]
-// 相当与
-book.title
-book.primaryAuthor.name
-```
-
-这里 `\Book.title` 与 `\Book.primaryAuthor.name` 就是 KeyPath.
-
-KeyPath 可以用 `.appending` 拼接
-
-```swift
-let authorKeyPath = \Book.primaryAuthor
-let nameKeyPath = authorKeyPath.appending(path: \.name)
-// nameKeyPath = \Book.primaryAuthor.name
-```
-
-### 新增  `swapAt()` 函数
-Swift 4 引入了一种在集合中交换两个元素的新方法: `swapAt()`
-
-Swift 3 交换集合中的元素的用 `swap()`
-
-```swift
-var numbers = [1,2,3,4,5]
-swap(&numbers[0], &numbers[1])
-// numbers = [2,1,3,4,5]
-```
-
-Swift 4 中可以直接用 
-
-```swift
-var numbers = [1,2,3,4,5]
-numbers.swapAt(0,1)
-// numbers = [2,1,3,4,5]
-```
-
-
-
-### 其他改动
-
-其他改动如：**新的整数协议**、**泛型下标**、**NSNumber bridging**等
-
-可以参考：[whats new in swift4](https://github.com/ole/whats-new-in-swift-4)
