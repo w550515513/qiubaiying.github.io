@@ -246,7 +246,7 @@ df = pd.DataFrame(np.random.randn(10, 4))
 
 pieces = [df[:3], df[3:7], df[7:]]#前3行+4到7行+8到最后
 pd.concat(pieces)
-"""
+
   0  1  2  3
 0 -0.548702 1.467327 -1.015962 -0.483075
 1 1.637550 -1.217659 -0.291519 -1.745505
@@ -258,7 +258,7 @@ pd.concat(pieces)
 7 -0.932132 1.956030 0.017587 -0.016692
 8 -0.575247 0.254161 -1.143704 0.215897
 9 1.193555 -0.077118 -0.408530 -0.862495
-"""
+
 ```
 
 ## 统计 ##
@@ -266,21 +266,21 @@ pd.concat(pieces)
 ```python
 # 求平均值
 df.mean()
-"""
+
 A -0.004474
 B -0.383981
 C -0.687758
 D 5.000000
 F 3.000000
 dtype: float64
-"""
+
 
 # 指定轴上的平均值
 df.mean(1)
 
 # 不同维度的 pandas 对象也可以做运算，它会自动进行对应，shift 用来做对齐操作。
 s = pd.Series([1,3,5,np.nan,6,8], index=dates).shift(2)
-"""
+
 2013-01-01 NaN
 2013-01-02 NaN
 2013-01-03 1
@@ -288,11 +288,11 @@ s = pd.Series([1,3,5,np.nan,6,8], index=dates).shift(2)
 2013-01-05 5
 2013-01-06 NaN
 Freq: D, dtype: float64
-"""
+
 
 # 对不同维度的 pandas 对象进行减法操作
 df.sub(s, axis='index')
-"""
+
    A  B  C D F
 2013-01-01 NaN NaN NaN NaN NaN
 2013-01-02 NaN NaN NaN NaN NaN
@@ -300,7 +300,7 @@ df.sub(s, axis='index')
 2013-01-04 -2.278445 -3.706771 -4.039575 2 0
 2013-01-05 -5.424972 -4.432980 -4.723768 0 -1
 2013-01-06 NaN NaN NaN NaN NaN
-"""
+
 ```
 
 ## 直方图 ##
@@ -474,4 +474,5 @@ df.to_excel('foo.xlsx', sheet_name='Sheet1')
 ```
 
 >资料来源于：[Python科学计算之Pandas详解，pythonpandas](http://www.bkjia.com/Pythonjc/1189627.html)
+
 >          [十分钟搞定pandas](http://python.jobbole.com/84416/)
