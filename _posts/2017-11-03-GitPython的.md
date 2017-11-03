@@ -58,7 +58,7 @@ print s
 
 一个dataframe是一个二维的表结构。Pandas的dataframe可以存储许多种不同的数据类型，并且每一个坐标轴都有自己的标签。你可以把它想象成一个series的字典项。
 
-###创建一个 DateFrame ###
+####创建一个 DateFrame ####
 
 ```python
 #创建日期索引序列 
@@ -79,7 +79,7 @@ print df
 2013-01-06 -0.126459 0.426328 -0.474553 -1.968056
 ```
 
-###字典创建 DataFrame###
+#### 字典创建 DataFrame ####
 
 ```python
 df2 = pd.DataFrame({ 'A' : 1,
@@ -98,7 +98,7 @@ df2 = pd.DataFrame({ 'A' : 1,
 3 1 2013-01-02 1 3 train foo
 ```
 
-###将csv文件数据导入Pandas###
+####将csv文件数据导入Pandas####
 
 ```python
 df = pd.read_csv("Average_Daily_Traffic_Counts.csv", header = 0)
