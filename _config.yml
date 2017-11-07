@@ -64,7 +64,7 @@ disqus_username: qiubaiying
 # Share component is depend on Comment so we can NOT use share only.
 # duoshuo_share: true                     # set to false if you want to use Comment without Sharing
 
-
+uyan: xumenger #友言博客评论
 
 
 # Analytics settings
