@@ -37,10 +37,10 @@ tags:
 1. AUSU开机按`esc`选择启动方式，选择U盘启动。
 2. 选择安装ubantu。
 3. 安装类型选择`其他选项`。
+ ![](http://oyug2kd6x.bkt.clouddn.com/anzhuangleixing.jpg)
+5. 磁盘分区。
 
-![](http://oyug2kd6x.bkt.clouddn.com/anzhuangleixing.jpg)
-
-4. 磁盘分区。
+![](http://oyug2kd6x.bkt.clouddn.com/fenqu.png)
 
 点击`-`腾出一个空闲磁盘，由于一块硬盘最多容纳4个主分区，或3个主分区外加1个扩展分区，在选择分区类型时，可能会出现“安装系统时空闲分区不可用”状况，为了解决问题，下面一律选择“逻辑分区”。若无法实现，则全部选择“逻辑分区”。
 
@@ -70,5 +70,5 @@ tags:
 - ubantu下可以看到windows盘，但windows下看不到ubantu的盘，可能需要共享。
 
 
->资料参考：[Beginners Guide To Install Windows 10 With Ubuntu   ](http://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/)
+>资料参考：[Beginners Guide To Install Windows 10 With Ubuntu ](http://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/)
 >          [   Ubuntu安装](http://www.jianshu.com/p/0ccf1778d8ae)
