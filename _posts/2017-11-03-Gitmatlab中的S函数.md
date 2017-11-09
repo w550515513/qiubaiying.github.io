@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      matlab中的S函数
-subtitle:   评论系统搭建
+subtitle:   智能控制作业
 date:       2017-11-03
 author:     WSS
 header-img: img/post-bg-beu.jpg
