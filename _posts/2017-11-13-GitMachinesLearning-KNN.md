@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      AAAMachine Learning 常见算法
-subtitle:   常见算法总结
-date:       2017-11-12
+title:      K近邻
+subtitle:   KNN
+date:       2017-11-13
 author:     WSS
-header-img: img/AI2.jpg
+header-img: img/AI4.jpg
 catalog: true
 tags:
     - Machine Learning
