@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      近邻分类
+title:      A近邻分类
 subtitle:   机器学习算法
 date:       2017-11-13
 author:     WSS
@@ -43,3 +43,4 @@ kNN的学习方法很朴素，简单说就是站队，对于已有的训练集�
 
 ## 一个例子 ##
 
+AAAA
