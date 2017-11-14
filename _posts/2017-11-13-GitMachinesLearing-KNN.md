@@ -2,7 +2,7 @@
 layout:     post
 title:      近邻分类
 subtitle:   机器学习算法
-date:       2017-11-07
+date:       2017-11-13
 author:     WSS
 header-img: img/AI4.jpg
 catalog: true
