@@ -4,7 +4,7 @@ title:      Machine Learning 常见算法
 subtitle:   常见算法总结
 date:       2017-11-12
 author:     WSS
-header-img: img/AI3.jpg
+header-img: img/AI2.jpg
 catalog: true
 tags:
     - Machine Learning
