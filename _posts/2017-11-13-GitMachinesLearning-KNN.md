@@ -190,4 +190,4 @@ def classify0(inX, dataSet, labels, k):#inX一个测试数据，dataSet所有的
     sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
     return sortedClassCount[0][0]
 ```
->[资料(http://blog.csdn.net/u012162613/article/details/41768407)
+>[资料](http://blog.csdn.net/u012162613/article/details/41768407)
