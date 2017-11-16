@@ -94,7 +94,100 @@ z-score落在一个无界的负数和正数构成的范围内，没有最大值�
 
 对于名义特征，如 性别，类别或其他属性需要将其转换为数值型格式。一种典型的解决方法就是利用哑变量编码（dummy coding）,其中1表示一个类别,0表示其他类别.
 
-## 例子 ##
+## 手写数字识别 ##
 
+### 任务 ###
 
+手写识别的概念：是指将在手写设备上书写时产生的轨迹信息转化为具体字码。
+手写识别系统是个很大的项目，识别汉字、英语、数字、其他字符。本文只是个小demo，重点不在手写识别而在于理解kNN，因此只识别0～9单个数字。
 
+输入格式：每个手写数字已经事先处理成32*32的二进制文本，存储为txt文件。0～9每个数字都有10个训练样本，5个测试样本。
+
+[数据及程序](https://github.com/w550515513/MachineLearning)
+
+### 算法步骤 ###
+
+1. step.1—初始化距离为最大值
+
+2. step.2—计算未知样本和每个训练样本的距离dist
+
+3. step.3—得到目前K个最临近样本中的最大距离maxdist
+
+4. step.4—如果dist小于maxdist，则将该训练样本作为K-最近邻样本
+
+5. step.5—重复步骤2、3、4，直到未知样本和所有训练样本的距离都算完
+
+6. step.6—统计K-最近邻样本中每个类标号出现的次数
+
+7. step.7—选择出现频率最大的类标号作为未知样本的类标号
+
+现在编程实现三个步骤：
+（1）将每个图片（即txt文本，以下提到图片都指txt文本）转化为一个向量，即32*32的数组转化为1*1024的数组，这个1*1024的数组用机器学习的术语来说就是特征向量。
+
+（2）训练样本中有10*10个图片，可以合并成一个100*1024的矩阵，每一行对应一个图片。（这是为了方便计算，很多机器学习算法在计算的时候采用矩阵运算，可以简化代码，有时还可以减少计算复杂度）。
+
+（3）测试样本中有10*5个图片，我们要让程序自动判断每个图片所表示的数字。同样的，对于测试图片，将其转化为1*1024的向量，然后计算它与训练样本中各个图片的“距离”（这里两个向量的距离采用欧式距离），然后对距离排序，选出较小的前k个，因为这k个样本来自训练集，是已知其代表的数字的，所以被测试图片所代表的数字就可以确定为这k个中出现次数最多的那个数字。
+
+第一步：转化为1*1024的特征向量。程序中的filename是文件名，比如3_3.txt
+
+```python
+def img2vector(filename):#将32行的数据转为1行数据
+    returnVect = zeros((1,1024))
+    fr = open(filename)
+    for i in range(32):
+        lineStr = fr.readline()
+        for j in range(32):
+            returnVect[0,32*i+j] = int(lineStr[j])
+    return returnVect
+```
+
+第二步、第三步：将训练集图片合并成100*1024的大矩阵，同时逐一对测试集中的样本分类
+
+```python
+def handwritingClassTest():
+
+    hwLabels = []
+    trainingFileList = listdir('trainingDigits')#得到训练文件夹下所有文件列表         
+    m = len(trainingFileList) #一共m个文件
+    trainingMat = zeros((m,1024))#建立m*1024的数组
+    for i in range(m):
+        fileNameStr = trainingFileList[i]            
+        fileStr = fileNameStr.split('.')[0] #得到0_1                
+        classNumStr = int(fileStr.split('_')[0])#得到0          
+        hwLabels.append(classNumStr)#得到真实结果
+        trainingMat[i,:] = img2vector('trainingDigits/%s' % fileNameStr)
+     
+    testFileList = listdir('testDigits')       
+    errorCount = 0.0
+    mTest = len(testFileList)
+    for i in range(mTest):
+        fileNameStr = testFileList[i]
+        fileStr = fileNameStr.split('.')[0]     
+        classNumStr = int(fileStr.split('_')[0])
+        vectorUnderTest = img2vector('testDigits/%s' % fileNameStr)
+        classifierResult = classify0(vectorUnderTest, trainingMat, hwLabels, 3)
+        print("the classifier came back with: %d, the real answer is: %d" % (classifierResult, classNumStr))
+        if (classifierResult != classNumStr): errorCount += 1.0
+    print("\nthe total number of errors is: %d" % errorCount)
+    print("\nthe total error rate is: %f" % (errorCount/float(mTest)))
+```
+
+这里面的函数classify()为分类主体函数，计算欧式距离，并最终返回测试图片类别：
+
+#分类主体程序，计算欧式距离，选择距离最小的k个，返回k个中出现频率最高的类别 
+```python 
+def classify0(inX, dataSet, labels, k):#inX一个测试数据，dataSet所有的训练数据，labels标签 ， k=k
+    dataSetSize = dataSet.shape[0]    #shape[0]得出dataSet的行数，即样本个数              
+    diffMat = tile(inX, (dataSetSize,1)) - dataSet   #将数组inX按行重复m遍
+    sqDiffMat = diffMat**2   #幂 - 返回x的y次幂
+    sqDistances = sqDiffMat.sum(axis=1) #axis＝1表示按照行的方向相加           
+    distances = sqDistances**0.5
+    sortedDistIndicies = distances.argsort()  #array.argsort()，得到每个元素的排序序号           
+    classCount={}                                      
+    for i in range(k):
+        voteIlabel = labels[sortedDistIndicies[i]]
+        classCount[voteIlabel] = classCount.get(voteIlabel,0) + 1
+    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
+    return sortedClassCount[0][0]
+```
+>[资料(http://blog.csdn.net/u012162613/article/details/41768407)
