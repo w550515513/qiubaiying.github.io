@@ -95,7 +95,7 @@ service-worker: true
 friends: [
     {
         title: "空位",
-        href: "baidu.com"
+        href: "www.baidu.com"
     },{
         title: "FaceBook",
         href: "https://www.facebook.com/profile.php?id=100009761527675"
