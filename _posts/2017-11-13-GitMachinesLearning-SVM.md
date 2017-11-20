@@ -11,7 +11,7 @@ tags:
     - SVM
 ---
 >读《机器学习与R语言》
-
+>[台湾大学机器学习课程](https://www.youtube.com/watch?v=A-GxGCCAIrg&index=1&list=PLXVfgk9fNX2IQOYPmqjqWsNUFl2kpk1U2)
 ## 算法简介 ##
 
 支持向量机（Support Vector Machine，SVM），是一种二分类模型，它的基本模型是定义在特征空间上的间隔最大的线性分类器，支持向量机的学习策略就是间隔最大化。可形式化为一个求解**凸二次规划**的问题，也等价于正则化的合页损失函数最小化问题，支持向量机的学习算法是求解凸二次规划的最后花算法。
@@ -70,11 +70,11 @@ tags:
 
 核技巧运用到支持向量机，其基本想法就是通过一个非线性变换，将输入空间对应于一个（更高维）特征空间，使得在输入空间Rn中的超曲面模型对应于特征空间中的平面模型（支持向量机）。
 
-如果原始空间是有限维的，即属性数有限，那么一定存在一个高维特征空间使样本可分。
-
+ 
 在特征空间中，我们对线性可分的新样本使用前面提到过的求解线性可分的情况下的分类问题的方法时，需要计算样本内积，但是因为样本维数很高，容易造成“维数灾难”，所以这里我们就引入了核函数，把高维向量的内积转变成了求低维向量的内积问题。
 [http://blog.csdn.net/jiangjieqazwsx/article/details/51418681](http://blog.csdn.net/jiangjieqazwsx/article/details/51418681)
 
-如何确定要将数据映射到什么样的空间？
+如何确定要将数据映射到什么样的空间？ 
+E/x学习/机器
 [https://www.jiqizhixin.com/articles/2017-10-08☆☆](https://www.jiqizhixin.com/articles/2017-10-08)
 
