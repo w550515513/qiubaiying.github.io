@@ -2,7 +2,7 @@
 layout:     post
 title:      SVM支持向量机
 subtitle:   SVM分类
-date:       2017-11-16
+date:       2017-11-18
 author:     WSS
 header-img: img/AI4.jpg
 catalog: true
