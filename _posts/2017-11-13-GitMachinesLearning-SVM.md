@@ -11,6 +11,7 @@ tags:
     - SVM
 ---
 >读《机器学习与R语言》
+
 >[台湾大学机器学习课程](https://www.youtube.com/watch?v=A-GxGCCAIrg&index=1&list=PLXVfgk9fNX2IQOYPmqjqWsNUFl2kpk1U2)
 ## 算法简介 ##
 
@@ -74,7 +75,9 @@ tags:
 在特征空间中，我们对线性可分的新样本使用前面提到过的求解线性可分的情况下的分类问题的方法时，需要计算样本内积，但是因为样本维数很高，容易造成“维数灾难”，所以这里我们就引入了核函数，把高维向量的内积转变成了求低维向量的内积问题。
 [http://blog.csdn.net/jiangjieqazwsx/article/details/51418681](http://blog.csdn.net/jiangjieqazwsx/article/details/51418681)
 
-如何确定要将数据映射到什么样的空间？ 
-E/x学习/机器
+如何确定要将数据映射到什么样的空间？
+ 
+文件：E/x学习/机器
+
 [https://www.jiqizhixin.com/articles/2017-10-08☆☆](https://www.jiqizhixin.com/articles/2017-10-08)
 
