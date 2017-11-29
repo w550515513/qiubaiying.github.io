@@ -112,7 +112,7 @@ prop.table(table(agreement))
 
 ```Python
 
-#原型：m <-  ksvm(target ~ predictors, data = iris,type = 'C-bsvc', kernel = 'rbfdot',kpar = list(sigma = 0.1), C = 10,prob.model = TRUE) 
+#原型：m <-  ksvm(target ~ predictors, data = mydata,type = 'C-bsvc', kernel = 'rbfdot',kpar = list(sigma = 0.1), C = 10,prob.model = TRUE) 
 #target:数据框mydata中需要建模的输出变量
 #predictors：是给出数据框mydata中用于预测的一个R公式，用“.”代替其他列数据
 #type:表示是用于分类还是回归，还是检测，取决于y是否是一个因子。缺省取C-svc或eps-svr可取值有:
