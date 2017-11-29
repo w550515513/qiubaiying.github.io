@@ -85,7 +85,7 @@ tags:
 
 
 
-```R
+```Python
 
 library(kernlab)
 
@@ -109,7 +109,8 @@ agreement <- letter_predictions == letters_test$letter
 prop.table(table(agreement))
 
 ```
-```R
+
+```Python
 
 #原型：m <-  ksvm(target ~ predictors, data = iris,type = 'C-bsvc', kernel = 'rbfdot',kpar = list(sigma = 0.1), C = 10,prob.model = TRUE) 
 #target:数据框mydata中需要建模的输出变量
