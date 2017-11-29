@@ -81,3 +81,47 @@ tags:
 
 [https://www.jiqizhixin.com/articles/2017-10-08☆☆](https://www.jiqizhixin.com/articles/2017-10-08)
 
+## 例子 ##
+
+
+
+```R
+library(kernlab)
+
+letters <- read.csv("letterdata.csv")
+str(letters)
+
+letters_train <- letters[1:16000,]
+letters_test <- letters[16001:20000,]
+
+
+letter_classifier <- ksvm(letter ~ .,data = letters_train,kernel = "vanilladot")
+letter_classifier
+
+letter_predictions <- predict(letter_classifier,letters_test)
+head(letter_predictions)
+table(letter_predictions,letters_test$letter)
+
+
+agreement <- letter_predictions == letters_test$letter
+
+prop.table(table(agreement))
+```
+```R
+#原型：m <-  ksvm(target ~ predictors, data = iris,type = 'C-bsvc', kernel = 'rbfdot',kpar = list(sigma = 0.1), C = 10,prob.model = TRUE) 
+#target:数据框mydata中需要建模的输出变量
+#predictors：是给出数据框mydata中用于预测的一个R公式，用“.”代替其他列数据
+#type:表示是用于分类还是回归，还是检测，取决于y是否是一个因子。缺省取C-svc或eps-svr可取值有:
+	C-svc 　C classification 分类
+	nu-svc 　nu classification
+	C-bsvc　 bound-constraint svm classification
+	spoc-svc　 Crammer, Singer native multi-class
+	kbb-svc　 Weston, Watkins native multi-class
+	one-svc 　novelty detection 
+	eps-svr 　epsilon regression   回归
+	nu-svr 　nu regression
+	eps-bsvr bound-constrain t svm regression
+kernel：核函数，也可自己写
+kpar：没见有用过的
+C：惩罚的大小，c越大边界越窄
+```
