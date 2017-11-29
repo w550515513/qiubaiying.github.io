@@ -86,6 +86,7 @@ tags:
 
 
 ```R
+
 library(kernlab)
 
 letters <- read.csv("letterdata.csv")
@@ -106,8 +107,10 @@ table(letter_predictions,letters_test$letter)
 agreement <- letter_predictions == letters_test$letter
 
 prop.table(table(agreement))
+
 ```
 ```R
+
 #原型：m <-  ksvm(target ~ predictors, data = iris,type = 'C-bsvc', kernel = 'rbfdot',kpar = list(sigma = 0.1), C = 10,prob.model = TRUE) 
 #target:数据框mydata中需要建模的输出变量
 #predictors：是给出数据框mydata中用于预测的一个R公式，用“.”代替其他列数据
@@ -124,4 +127,5 @@ prop.table(table(agreement))
 kernel：核函数，也可自己写
 kpar：没见有用过的
 C：惩罚的大小，c越大边界越窄
+
 ```
