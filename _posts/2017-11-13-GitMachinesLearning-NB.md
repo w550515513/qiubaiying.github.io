@@ -2,7 +2,7 @@
 layout:     post
 title:      NB朴素贝叶斯
 subtitle:   naive bayes
-date:       2017-11-22
+date:       2017-11-25
 author:     WSS
 header-img: img/AI4.jpg
 catalog: true
