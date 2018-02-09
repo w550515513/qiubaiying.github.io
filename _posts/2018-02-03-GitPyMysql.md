@@ -80,8 +80,28 @@ conn.close()
 
 ```
 
-## select Data ##
+## Select Data ##
 
+`SELECT column_name,column_name FROM table_name [WHERE Clause] [LIMIT N][ OFFSET M]`
+
+>查询语句中可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。
+
+>SELECT 命令可以读取一条或者多条记录。
+
+>可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据
+
+>可以使用 WHERE 语句来包含任何条件。
+
+>可以使用 LIMIT 属性来设定返回的记录数。
+
+>可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。
+
+### 选择所有数据 ###
+```python
+
+cur.execute(select * from table_name)
+
+```
 
 
 
