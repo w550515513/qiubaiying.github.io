@@ -26,7 +26,6 @@ tags:
 ## Connect MySql ##
 
 ```python
-
 import MySQLdb
 
 # 打开数据库连接eg:(host='localhost', user='root', password='888888', db='tianqi', charset='utf8')
@@ -34,7 +33,6 @@ conn = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
 conn.set_character_set('utf8')
 # 使用cursor()方法获取操作游标 
 cur = conn.cursor()
-
 ```
 
 ## Create Table ##
@@ -44,7 +42,6 @@ cur = conn.cursor()
 2、MySql代码操作
 
 ```python
-
 sql = """CREATE TABLE EMPLOYEE (
          FIRST_NAME  CHAR(20) NOT NULL,
          LAST_NAME  CHAR(20),
@@ -57,7 +54,6 @@ cursor.execute(sql)
 cur.close()
 conn.commit()
 conn.close()
-
 ```
 
 ## Insert Data ##
@@ -65,7 +61,6 @@ conn.close()
 mysql的数据格式主要包括5类：[data type of mysql](http://blog.csdn.net/bzhxuexi/article/details/43700435)
 
 ```python
-
 conn = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
 conn.set_character_set('utf8')
 # 使用cursor()方法获取操作游标 
@@ -77,7 +72,6 @@ cur.execute("INSERT INTO table_name (Row_name1, Row_name2 ,Row_name3 ,Row_name4)
 cur.close()
 conn.commit()
 conn.close()					
-
 ```
 
 ## Select Data ##
@@ -98,7 +92,6 @@ conn.close()
 
 ### 选择所有数据 ###
 ```python
-
 cur.execute(select * from table_name)
 
 ```
