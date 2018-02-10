@@ -58,7 +58,16 @@ conn.close()
 sql写完后必须要提交commit()，尤其是insert, update, delete时，否则数据库没有变化!!! 
 而像select这种普通的查询，不涉及修改数据库的，是否commit()没有关系
 
-若有必要，则还需`conn.rollback()`  取消当前事务
+若有必要，则还需`conn.rollback()`  取消当前事务，可采用如下写法
+
+```python
+try:
+   cur.execute(sql)
+   db.commit()
+except:
+   # 发生错误时回滚
+   db.rollback()
+```
 
 ## Insert Data ##
 
@@ -80,9 +89,10 @@ conn.commit()
 conn.close()					
 ```
 
+
 ## Select Data ##
 
->*★*[参考资料](http://bbs.csdn.net/topics/390407669),[参考资料](http://blog.csdn.net/changjiangbuxi/article/details/13169861)
+>**★**[参考资料](http://bbs.csdn.net/topics/390407669),[参考资料](http://blog.csdn.net/changjiangbuxi/article/details/13169861)
 
 `SELECT column_name,column_name FROM table_name [WHERE Clause] [LIMIT N][ OFFSET M]`
 
@@ -162,14 +172,18 @@ cur.execute("SELECT * FROM table_name order by id desc[asc] limit 10")
 
 
 #### GROUP BY关键字分组查询 ####
+
 ```python
 #用GROUP BY关键字分组查询,根据column_name1进行分组
 cur.execute("select column_name1,column_name2 from table_name GROUP BY column_name1")
-
-
+#根据两个列进行分组，只有两个数据都不同是才分为两组
+cur.execute("SELECT * FROM table_name GROUP BY column_name1,column_name2")
+#分组查询配合GROUP_CONCAT()来使用，可以看到每个组中的详细信息
+#可以看到每个分组中都包括哪些username
+cur.execute(" SELECT *,GROUP_CONCAT(username) FROM table_name GROUP BY column_name1")
+#
 ```
-[参考资料](http://wiki.jikexueyuan.com/project/mysql/useful-functions/group.html)
-
+>**★**[group by 参考资料](http://blog.csdn.net/lingyun_blog/article/details/44099783),[group by 参考资料](http://wiki.jikexueyuan.com/project/mysql/useful-functions/group.html)
 
 #### DISTINCT关键字去除结果中的重复行 ####
 ```python
@@ -185,10 +199,46 @@ cur.execute("select *,count(distinct name) from table_name group by column_name"
 [参考资料](http://blog.csdn.net/guocuifang655/article/details/3993612)
 
 
+## Delete Data ##
+在MySQL中有两种方法可以删除数据，一种是DELETE语句，另一种是TRUNCATE语句。DELETE语句可以通过WHERE对要删除的记录进行选择。而使用TRUNCATE将删除表中的所有记录。DELETE语句更灵活。
+
+#### TRUNCATE语句 ####
+```python
+#一定注意备份，此命令将删除此表的所有数据
+cur.execute("TRUNCATE table_name")
+
+cur.close()
+conn.commit()
+conn.close()		
+
+```
+
+#### DELETE语句 ####
+**要经过测试后方可使用**
+`delete from 表名 where 删除条件`
+
+```python
+#删除条件同查询操作
+cur.execute("DELETE FROM table_name WHERE sum > 100")
+```
+
 ## Update Data ##
+更新操作用于更新数据表的的数据，以下实例将 EMPLOYEE 表中的 SEX 字段为 'M' 的 AGE 字段递增 1：
 
+```python
+cur.excute("UPDATE EMPLOYEE SET AGE = AGE + 1 WHERE SEX = '%c'" % ('M'))
+try:
+   # 执行SQL语句
+   cursor.execute(sql)
+   # 提交到数据库执行
+   db.commit()
+except:
+   # 发生错误时回滚
+   db.rollback()
 
-
+# 关闭数据库连接
+db.close()
+```
 
 
 ## cursor游标对象属性及方法 ##
@@ -196,24 +246,35 @@ cur.execute("select *,count(distinct name) from table_name group by column_name"
 #### 1、cursor执行命令的方法 ####
 
 `callproc(sql, procname, args)`   执行存储过程,接收参数为存储过程名和参数列表，返回值为受影响的行数
+
 `execute(sql,param, args)`     执行单条sql语句，接收参数param,返回值为args受影响的行数
+
 `executemany(sql,param, args)`  执行多条sql语句，接收参数param,返回值为args受影响的行数
+
 `next()`            使用迭代对象得到结果的下一行
+
 `close()`           关闭游标
 
 #### 2、cursor用来接收返回值的方法 ####
 
 `fetchone()`        返回一条结果行
+
 `fetchall(self)`       匹配所有剩余结果
+
 `fetchmany(size-cursor,arraysize)`  匹配结果的下几行
+
 `rowcount`         读取数据库表中的*行数*，最后一次execute()返回或影响的行数
 
 `scroll(self, value, mode=’relative’)`     移动指针到某一行。如果mode=’relative’,则表示从当前所在行移动value条，如果mode=’absolute’,则表示从结果集的第一行移动value条
 
 `arraysize`        使用fetchmany()方法时一次取出的记录数，默认为1
+
 `discription`      返回游标的活动状态，包括（7元素）：
 (name,type_code,display_size,internal_size,precision,scale,null_ok)其中name, type_code是必须的。
+
 `lastrowid`        返回最后更新行的ID（可选），如果数据库不支持，返回None
 
 
+## 错误处理 ##
 
+![](http://oyug2kd6x.bkt.clouddn.com//mysql/error.png)
