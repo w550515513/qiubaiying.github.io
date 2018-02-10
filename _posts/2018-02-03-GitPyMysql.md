@@ -25,6 +25,7 @@ tags:
 
 ## Connect MySql ##
 
+
 ```python
 import MySQLdb
 
@@ -59,7 +60,6 @@ sql写完后必须要提交commit()，尤其是insert, update, delete时，否�
 而像select这种普通的查询，不涉及修改数据库的，是否commit()没有关系
 
 若有必要，则还需`conn.rollback()`  取消当前事务，可采用如下写法
-
 ```python
 try:
    cur.execute(sql)
@@ -81,8 +81,8 @@ conn.set_character_set('utf8')
 # 使用cursor()方法获取操作游标 
 cur = conn.cursor()
 #
-cur.execute("INSERT INTO table_name (column_name1, column_name2 ,column_name3 ,column_name4) VALUES (%s, %s, %s, %s)",
-                    (value1, value2,value3, value4))
+cur.execute("INSERT INTO table_name (column_name1, column_name2 ,column_name3 ,column_name4) 
+						VALUES (%s, %s, %s, %s)",(value1, value2,value3, value4))
 
 cur.close()
 conn.commit()
@@ -168,9 +168,6 @@ cur.execute("SELECT * FROM table_name limit 2")
 cur.execute("SELECT * FROM table_name order by id desc[asc] limit 10")
 ```
 
-
-
-
 #### GROUP BY关键字分组查询 ####
 
 ```python
@@ -181,7 +178,6 @@ cur.execute("SELECT * FROM table_name GROUP BY column_name1,column_name2")
 #分组查询配合GROUP_CONCAT()来使用，可以看到每个组中的详细信息
 #可以看到每个分组中都包括哪些username
 cur.execute(" SELECT *,GROUP_CONCAT(username) FROM table_name GROUP BY column_name1")
-#
 ```
 >**★**[group by 参考资料](http://blog.csdn.net/lingyun_blog/article/details/44099783),[group by 参考资料](http://wiki.jikexueyuan.com/project/mysql/useful-functions/group.html)
 
@@ -192,7 +188,6 @@ cur.execute("select distinct column_name from table_name;")
 
 #得到不重复数据。先进行分组，之后选择
 cur.execute("select *,count(distinct name) from table_name group by column_name")
-
 ```
 
 >SELECT COUNT(*) FROM table_name,获取表的行数
@@ -215,6 +210,7 @@ conn.close()
 
 #### DELETE语句 ####
 **要经过测试后方可使用**
+
 `delete from 表名 where 删除条件`
 
 ```python
