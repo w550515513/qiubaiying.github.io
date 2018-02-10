@@ -55,6 +55,10 @@ cur.close()
 conn.commit()
 conn.close()
 ```
+sql写完后必须要提交commit()，尤其是insert, update, delete时，否则数据库没有变化!!! 
+而像select这种普通的查询，不涉及修改数据库的，是否commit()没有关系
+
+若有必要，则还需`conn.rollback()`  取消当前事务
 
 ## Insert Data ##
 
@@ -78,7 +82,7 @@ conn.close()
 
 ## Select Data ##
 
->[参考资料](http://bbs.csdn.net/topics/390407669),[参考资料](http://blog.csdn.net/changjiangbuxi/article/details/13169861)
+>*★*[参考资料](http://bbs.csdn.net/topics/390407669),[参考资料](http://blog.csdn.net/changjiangbuxi/article/details/13169861)
 
 `SELECT column_name,column_name FROM table_name [WHERE Clause] [LIMIT N][ OFFSET M]`
 
@@ -95,6 +99,7 @@ conn.close()
 #### 选择所有数据 ####
 ```python
 cur.execute("select * from table_name")
+#fetchone() 返回一条结果行,fetchall(self)        匹配所有剩余结果
 results = cursor.fetchall()#元组型数据
 results = list(results)
 ```
@@ -117,6 +122,7 @@ cur.execute("SELECT * FROM tianqi.user_agent where id [not] in (2,4)")#2,3,4三�
 
 #数值计算查询
 cur.execute("SELECT * FROM table_name where column_name1-column_name2 = 2")
+cur.execute("SELECT * FROM table_name where column_name1 = column_name2+2")
 
 
 #字符串查询
@@ -141,8 +147,73 @@ results = cursor.fetchall()#元组型数据
 results = list(results)
 ```
 
+#### 查询前2条记录 ####
+```python
+cur.execute("SELECT * FROM table_name limit 2")
+```
+
+#### 配合order by 查询数据 ####
+```python
+#desc降序，asc升序，先排序后取前几
+cur.execute("SELECT * FROM table_name order by id desc[asc] limit 10")
+```
 
 
 
->资料来源于：[Python科学计算之Pandas详解，pythonpandas](http://www.bkjia.com/Pythonjc/1189627.html)
->          [十分钟搞定pandas](http://python.jobbole.com/84416/)
+
+#### GROUP BY关键字分组查询 ####
+```python
+#用GROUP BY关键字分组查询,根据column_name1进行分组
+cur.execute("select column_name1,column_name2 from table_name GROUP BY column_name1")
+
+
+```
+[参考资料](http://wiki.jikexueyuan.com/project/mysql/useful-functions/group.html)
+
+
+#### DISTINCT关键字去除结果中的重复行 ####
+```python
+#只能得到该列所有的不重复数据
+cur.execute("select distinct column_name from table_name;")
+
+#得到不重复数据。先进行分组，之后选择
+cur.execute("select *,count(distinct name) from table_name group by column_name")
+
+```
+
+>SELECT COUNT(*) FROM table_name,获取表的行数
+[参考资料](http://blog.csdn.net/guocuifang655/article/details/3993612)
+
+
+## Update Data ##
+
+
+
+
+
+## cursor游标对象属性及方法 ##
+
+#### 1、cursor执行命令的方法 ####
+
+`callproc(sql, procname, args)`   执行存储过程,接收参数为存储过程名和参数列表，返回值为受影响的行数
+`execute(sql,param, args)`     执行单条sql语句，接收参数param,返回值为args受影响的行数
+`executemany(sql,param, args)`  执行多条sql语句，接收参数param,返回值为args受影响的行数
+`next()`            使用迭代对象得到结果的下一行
+`close()`           关闭游标
+
+#### 2、cursor用来接收返回值的方法 ####
+
+`fetchone()`        返回一条结果行
+`fetchall(self)`       匹配所有剩余结果
+`fetchmany(size-cursor,arraysize)`  匹配结果的下几行
+`rowcount`         读取数据库表中的*行数*，最后一次execute()返回或影响的行数
+
+`scroll(self, value, mode=’relative’)`     移动指针到某一行。如果mode=’relative’,则表示从当前所在行移动value条，如果mode=’absolute’,则表示从结果集的第一行移动value条
+
+`arraysize`        使用fetchmany()方法时一次取出的记录数，默认为1
+`discription`      返回游标的活动状态，包括（7元素）：
+(name,type_code,display_size,internal_size,precision,scale,null_ok)其中name, type_code是必须的。
+`lastrowid`        返回最后更新行的ID（可选），如果数据库不支持，返回None
+
+
+
