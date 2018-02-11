@@ -50,7 +50,7 @@ sql = """CREATE TABLE EMPLOYEE (
          SEX CHAR(1),
          INCOME FLOAT )"""
 
-cursor.execute(sql)
+cur.execute(sql)
 
 cur.close()
 conn.commit()
@@ -117,14 +117,14 @@ conn.close()
 ```python
 cur.execute("select * from table_name")
 #fetchone() 返回一条结果行,fetchall(self)        匹配所有剩余结果
-results = cursor.fetchall()#元组型数据
+results = cur.fetchall()#元组型数据
 results = list(results)
 ```
 
 #### 选择某列数据 ####
 ```python
 cur.execute("select column_name1,column_name2 from table_name")
-results = cursor.fetchall()#元组型数据
+results = cur.fetchall()#元组型数据
 results = list(results)
 ```
 
@@ -151,7 +151,7 @@ cur.execute("SELECT * FROM table_name WHERE times like "m_n"")#以m开头以n结
 #查询日期型数据
 cur.execute("SELECT * FROM table_name WHERE date != '2011-04-08'")#比较日期时，“<”表示早于，“>”表示晚于。
 
-results = cursor.fetchall()#元组型数据
+results = cur.fetchall()#元组型数据
 results = list(results)
 ```
 
@@ -160,7 +160,7 @@ results = list(results)
 #查询某列中的非空数据
 cur.execute("SELECT * FROM table_name where column_name is not null")
 
-results = cursor.fetchall()#元组型数据
+results = cur.fetchall()#元组型数据
 results = list(results)
 ```
 
@@ -232,7 +232,7 @@ cur.execute("DELETE FROM table_name WHERE sum > 100")
 cur.excute("UPDATE EMPLOYEE SET AGE = AGE + 1 WHERE SEX = '%c'" % ('M'))
 try:
    # 执行SQL语句
-   cursor.execute(sql)
+   cur.execute(sql)
    # 提交到数据库执行
    db.commit()
 except:
