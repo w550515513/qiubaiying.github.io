@@ -80,9 +80,16 @@ conn = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
 conn.set_character_set('utf8')
 # 使用cursor()方法获取操作游标 
 cur = conn.cursor()
-#
+#方式一：
 cur.execute("INSERT INTO table_name (column_name1, column_name2 ,column_name3 ,column_name4) 
 						VALUES (%s, %s, %s, %s)",(value1, value2,value3, value4))
+						
+#方式二：
+sql = "INSERT INTO ip (ip ,port ,response_time ,test_time) VALUES ('%s', '%s', '%f', '%d')" %(
+                str(item_dict["IP"]), str(item_dict["port"]), item_dict["response_time"], item_dict["update_time"])
+
+            print(sql)
+            cur.execute(sql)
 
 cur.close()
 conn.commit()
