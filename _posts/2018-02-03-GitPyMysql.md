@@ -133,7 +133,7 @@ results = list(results)
 #数值查询
 cur.excute("select * from table_name where ip =('%s')" %("180.115.7.52"))#带参数选择
 cur.execute("SELECT * FROM table_name WHERE sum > 100")
-cur.excute("sql = "select * from table_name where id >('%d')" %(20)")#带参数选择
+cur.excute("select * from table_name where id >('%d')" %(20))#带参数选择
 cur.execute("SELECT * FROM table_name WHERE sum > 100 and sum2 <100")
 cur.execute("SELECT * FROM table_name WHERE sum > 100 or sum2 <100")
 cur.execute("SELECT * FROM tianqi.user_agent where id [not] between 2 and 4")#2,3,4三个
