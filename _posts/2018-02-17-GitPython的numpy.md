@@ -25,12 +25,12 @@ arrange：按指定范围创建数据
 linspace：创建线段
 
 
-```
+```python
 import numpy as np
 ```
 
 
-```
+```python
 np.array([[1,2,3],[4,5,6]])
 #指定数据 dtype 
 a = np.array([[1,2,3],[4,5,6]],dtype=np.int32)
@@ -63,7 +63,7 @@ arrange：按指定范围创建数据
 linspace：创建线段
 
 
-```
+```python
 np.array([[1,2,3],[4,5,6]])  # 2d 矩阵 2行3列
 ```
 
@@ -76,7 +76,7 @@ np.array([[1,2,3],[4,5,6]])  # 2d 矩阵 2行3列
 
 
 
-```
+```python
 np.zeros((3,4),dtype=np.int32)#创建一个3X4的零矩阵
 ```
 
@@ -90,7 +90,7 @@ np.zeros((3,4),dtype=np.int32)#创建一个3X4的零矩阵
 
 
 
-```
+```python
 np.ones((3,4),dtype=np.int32)#创建一个3X4的1矩阵
 ```
 
@@ -104,7 +104,7 @@ np.ones((3,4),dtype=np.int32)#创建一个3X4的1矩阵
 
 
 
-```
+```python
 np.empty((3,4)) # 创建全空数组, 其实每个值都是接近于零的数,数据为empty
 ```
 
