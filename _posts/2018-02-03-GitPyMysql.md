@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:        PyMySql的使用
+title:        PyMySql的使用入门
 subtitle:   python与mysql初步总结
 date:       2018-02-03
 author:    WSS
