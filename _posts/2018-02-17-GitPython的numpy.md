@@ -11,7 +11,7 @@ tags:
     - Numpy
 ---
 
-
+第一次用 `Jupyter Notebook`写，省事，但是效果一般……
 
 `import numpy as np`
 
