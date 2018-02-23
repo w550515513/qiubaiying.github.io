@@ -16,4 +16,4 @@ tags:
 `import numpy as np`
 
 
-<iframe src="http://oyug2kd6x.bkt.clouddn.com//numpy/numpy.html" width="1000px" height="4500px" frameborder="1" scrolling="yes"> </iframe>
+<iframe src="http://oyug2kd6x.bkt.clouddn.com//numpy/numpy.html" width="1200px" height="4500px" frameborder="0" scrolling="yes"> </iframe>
