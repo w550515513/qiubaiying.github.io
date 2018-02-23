@@ -4,7 +4,7 @@ title:      	Python的numpy
 subtitle:   numpy使用
 date:       2018-02-17
 author:     WSS
-header-img: img/AI4.jpg
+header-img: img/post-bg-os-metro.jpg
 catalog: true
 tags:
     - Python
